@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    image: hanabilearningenvironmentexample
+    container_name: hanabilearningenvironmentexample
+    volumes:
+      - type: bind
+        source: ./
+        target: /app
+  
