@@ -1,6 +1,6 @@
 // HanabiPlusPlus.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+asfjasdjaksdjaklsdjokasdjos
 #include <iostream>
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_game.h"
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_state.h"
@@ -32,6 +32,12 @@ int main()
         HanabiObservation observation(state, currentPlayer);
 
         auto moves = state.LegalMoves(currentPlayer);
+        for (auto move : moves)
+        {
+            state.ApplyMove(move);
+        }
+
+        auto history = state.MoveHistory();
     }
 }
 
