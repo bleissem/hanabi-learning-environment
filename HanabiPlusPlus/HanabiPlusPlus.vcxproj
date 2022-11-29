@@ -157,6 +157,7 @@
     <ClInclude Include="..\hanabi_learning_environment\hanabi_lib\hanabi_state.h" />
     <ClInclude Include="..\hanabi_learning_environment\hanabi_lib\observation_encoder.h" />
     <ClInclude Include="..\hanabi_learning_environment\hanabi_lib\util.h" />
+    <ClInclude Include="Agent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

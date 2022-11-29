@@ -5,24 +5,11 @@
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_game.h"
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_state.h"
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_observation.h"
+#include "Agent.h"
 using namespace hanabi_learning_env;
 
 const int CHANCE_PLAYER_ID = -1;
 
-void Deal(HanabiState& state)
-{
-    while (!state.IsTerminal())
-    {
-        int currentPlayer = state.CurPlayer();
-        if (currentPlayer == CHANCE_PLAYER_ID)
-        {
-            state.ApplyRandomChance();
-            continue;
-        }
-
-        return;
-    }
-}
 
 /// <summary>
 /// eines der Ziele: Entscheidungsprozess für ein Zug
@@ -44,13 +31,18 @@ int main()
     std::cout << "Hello World!\n";    
     
     std::unordered_map<std::string, std::string> gameParameter;
-    gameParameter.insert({ "players", "3" });
+    gameParameter.insert({ "players", "2" });
     gameParameter.insert({ "random_start_player", "true" });
+    // gameParameter.insert({ "observation_type", "2" });
 
     HanabiGame game(gameParameter);
 
     HanabiState state(&game);
     
+    Agent* agent1 = new Agent();
+    Agent* agent2 = new Agent();
+    
+
     // Deal(state);
 
     while (!state.IsTerminal())
@@ -62,12 +54,44 @@ int main()
             continue;
         }
 
+        // aktuelle Spieler gesetzt
+
         HanabiObservation observation(state, currentPlayer);
 
-        auto move = GetRandomMove(state, currentPlayer);
+        Agent* currentAgent;
+        if (currentPlayer == 1)
+        {
+            currentAgent = agent1;
+        }
+        else
+        {
+            currentAgent = agent2;
+        }
 
-        state.ApplyMove(*move);
+        int move = currentAgent->Act(&observation);
+
+        HanabiMove hanabiMove = game.GetMove(move);        
+
+        int last_score = state.Score();
+
+        state.ApplyMove(hanabiMove);
+
+        while (currentPlayer == CHANCE_PLAYER_ID)
+        {
+            state.ApplyRandomChance();
+            continue;
+        }
+
+        
+        int reward = state.Score() - last_score;
     }
+
+    delete agent1;
+    agent1 = nullptr;
+
+    delete agent2;
+    agent2 = nullptr;
+
 
     std::cout <<  state.Score();
 }
