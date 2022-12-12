@@ -5,7 +5,7 @@
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_game.h"
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_state.h"
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_observation.h"
-#include "Agent.h"
+
 using namespace hanabi_learning_env;
 
 const int CHANCE_PLAYER_ID = -1;
@@ -39,10 +39,6 @@ int main()
 
     HanabiState state(&game);
     
-    Agent* agent1 = new Agent();
-    Agent* agent2 = new Agent();
-    
-
     // Deal(state);
 
     while (!state.IsTerminal())
@@ -57,7 +53,7 @@ int main()
         // aktuelle Spieler gesetzt
 
         HanabiObservation observation(state, currentPlayer);
-
+        /*
         Agent* currentAgent;
         if (currentPlayer == 1)
         {
@@ -84,15 +80,8 @@ int main()
 
         
         int reward = state.Score() - last_score;
+        */
     }
-
-    delete agent1;
-    agent1 = nullptr;
-
-    delete agent2;
-    agent2 = nullptr;
-
-
     std::cout <<  state.Score();
 }
 
