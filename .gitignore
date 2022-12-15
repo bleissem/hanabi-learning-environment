@@ -1,2 +1,6 @@
 *.pyc
 .devcontainer/
+.idea/
+
+/cmake-build-debug/
+/.vs/

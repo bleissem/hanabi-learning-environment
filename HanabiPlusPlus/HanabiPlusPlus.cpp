@@ -5,6 +5,7 @@
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_game.h"
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_state.h"
 #include "../hanabi_learning_environment/hanabi_lib/hanabi_observation.h"
+
 using namespace hanabi_learning_env;
 
 const int CHANCE_PLAYER_ID = -1;
@@ -64,6 +65,22 @@ int main()
 		}
 
 		HanabiObservation observation(state, currentPlayer);
+        /*
+        Agent* currentAgent;
+        if (currentPlayer == 1)
+        {
+            currentAgent = agent1;
+        }
+        else
+        {
+            currentAgent = agent2;
+        }
+
+        int move = currentAgent->Act(&observation);
+
+        HanabiMove hanabiMove = game.GetMove(move);        
+
+        int last_score = state.Score();
 
 		auto move = GetRandomMove(state, currentPlayer);
 

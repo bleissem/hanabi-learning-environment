@@ -399,5 +399,7 @@ FodyWeavers.xsd
 *.sln.iml
 
 
+/camke-build-debug/
+/.vs/
 
 HanabiPlusPlus.exe
