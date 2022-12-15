@@ -11,17 +11,17 @@ const int CHANCE_PLAYER_ID = -1;
 
 void Deal(HanabiState& state)
 {
-    while (!state.IsTerminal())
-    {
-        int currentPlayer = state.CurPlayer();
-        if (currentPlayer == CHANCE_PLAYER_ID)
-        {
-            state.ApplyRandomChance();
-            continue;
-        }
+	while (!state.IsTerminal())
+	{
+		int currentPlayer = state.CurPlayer();
+		if (currentPlayer == CHANCE_PLAYER_ID)
+		{
+			state.ApplyRandomChance();
+			continue;
+		}
 
-        return;
-    }
+		return;
+	}
 }
 
 /// <summary>
@@ -32,44 +32,45 @@ void Deal(HanabiState& state)
 /// <returns></returns>
 HanabiMove* GetRandomMove(HanabiState& state, int currentPlayer)
 {
-    std::vector<HanabiMove> moves = state.LegalMoves(currentPlayer);
-    std::vector<HanabiMove>::iterator randIt = moves.begin();
-    std::advance(randIt, std::rand() % moves.size());
-    HanabiMove move = *randIt;
-    return &move;
+	std::vector<HanabiMove> moves = state.LegalMoves(currentPlayer);
+	std::vector<HanabiMove>::iterator randIt = moves.begin();
+	std::advance(randIt, std::rand() % moves.size());
+	HanabiMove move = *randIt;
+	return &move;
 }
 
 int main()
 {
-    std::cout << "Hello World!\n";    
-    
-    std::unordered_map<std::string, std::string> gameParameter;
-    gameParameter.insert({ "players", "3" });
-    gameParameter.insert({ "random_start_player", "true" });
+	std::cout << "Hello World!\n";
 
-    HanabiGame game(gameParameter);
+	std::unordered_map<std::string, std::string> gameParameter;
+	gameParameter.insert({ "players", "3" });
+	gameParameter.insert({ "random_start_player", "true" });
 
-    HanabiState state(&game);
-    
-    // Deal(state);
+	HanabiGame game(gameParameter);
 
-    while (!state.IsTerminal())
-    {
-        int currentPlayer = state.CurPlayer();
-        if (currentPlayer == CHANCE_PLAYER_ID)
-        {
-            state.ApplyRandomChance();
-            continue;
-        }
+	HanabiState state(&game);
 
-        HanabiObservation observation(state, currentPlayer);
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+	// Deal(state);
 
-        auto move = GetRandomMove(state, currentPlayer);
+	while (!state.IsTerminal())
+	{
+		int currentPlayer = state.CurPlayer();
+		if (currentPlayer == CHANCE_PLAYER_ID)
+		{
+			state.ApplyRandomChance();
+			continue;
+		}
 
-        state.ApplyMove(*move);
-    }
+		HanabiObservation observation(state, currentPlayer);
 
-    std::cout <<  state.Score();
+		auto move = GetRandomMove(state, currentPlayer);
+
+		state.ApplyMove(*move);
+	}
+
+	std::cout << state.Score();
 }
 
 
